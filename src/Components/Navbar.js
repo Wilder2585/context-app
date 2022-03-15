@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import UserContext from '../contexts/UserContext'
 
 const Navbar = () => {
   
-  const user = { name : "Wilder"};
+ const {user, login, logout} = useContext(UserContext);
   
   
   return (
@@ -13,10 +14,10 @@ const Navbar = () => {
           </span>
           {
             user
-            ? <button className="btn btn-primary">
+            ? <button className="btn btn-primary" onClick={logout}>
                 Cerrar Sesion    
               </button>
-            : <button className="btn btn-primary">
+            : <button className="btn btn-primary" onClick={login}>
                 Iniciar Sesion    
               </button>
           }

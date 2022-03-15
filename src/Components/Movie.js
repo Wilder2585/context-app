@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import UserContext from '../contexts/UserContext';
 
 const Movie = ({movie}) => {
   
+  const { user, toggleFavoriteMovieUser } = useContext(UserContext);
   const estilo = {
     height: '260px',
     objectFit: 'cover', // trata de adaptar la imagen al tamaño puesto 
     objectPosition: '' //posicion de la imagen
   }
 
-  const ifFavorite = false;
+  const ifFavorite = user?.favoriteMovie?.includes(movie.id);
   
   return (
     <div className='card'>
@@ -19,13 +21,18 @@ const Movie = ({movie}) => {
         </img>
         <div className='card-body'>
           <h4>{movie.title}</h4>  
-          <button className={`btn ${ifFavorite ? 'btn-success' : 'btn-outline-primary'}`}>
+          { user?.id &&
+           <button className={
+            `btn ${ifFavorite ? 'btn-success' : 'btn-outline-primary'}`} 
+            onClick={() => toggleFavoriteMovieUser(movie.id)}>
             Favoritos
-          </button>
+          </button> }
+
+         
         </div>
 
 
-    <h1>Movie</h1>
+    
 
     </div>
   )
